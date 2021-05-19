@@ -1,0 +1,89 @@
+<style>
+  #boxContainer {
+    background: aliceblue;
+    padding: 20px;
+    border: 1px solid deepskyblue;
+    margin: 0 auto;
+    max-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 10px;
+    background: deepskyblue;
+    width: 100px;
+    height: 100px;
+    border: 1px solid dimgrey;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .box:active {
+    box-shadow: none;
+    font-weight: bold;
+    color: darkslategrey;
+  }
+</style>
+<div id="boxContainer">
+  <div class="box">box 1</div>
+  <div class="box">box 2</div>
+  <div class="box">box 3</div>
+  <div class="box">box 4</div>
+</div>
+<a target="_blank"
+   href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event"
+   >MDN Event</a>
+<script>
+  // https://www.google.com/search?q=javascript+event+capturing+and+bubbling&rlz=1C1ONGR_esES999ES999&sxsrf=ALiCzsYAkq_hdsRsztXRBlUKlNrrnEyDNw:1651579170213&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjKzYjuo8P3AhX0iP0HHVRrAj8Q_AUoA3oECAIQBQ&biw=735&bih=864&dpr=2.2
+  const boxes = document.querySelectorAll('.box')
+  const [box1, box2, box3, box4] = boxes
+
+  function logger(e, element) {
+    console.log(`${e.type} on ${element}`, {
+      bubbles: e.bubbles,
+      cancelBubble: e.cancelBubble,
+      cancelable: e.cancelable,
+      target: e.target,
+      currentTarget: e.currentTarget,
+    });
+  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+  box1.addEventListener("click", (e) => {
+    const myEvent = new Event('myEvent')
+    box2.dispatchEvent(myEvent)
+  })
+
+  box2.addEventListener("myEvent", (e) => {
+    logger(e, box2.textContent)
+  })
+
+  box3.addEventListener("click", (e) => {
+    const myBubbleEvent = new Event('myBubbleEvent', {bubbles: true})
+    box4.dispatchEvent(myBubbleEvent)
+  })
+
+  box4.addEventListener("myBubbleEvent", (e) => {
+    // e.stopPropagation()
+    // e.cancelBubble = true
+    logger(e, box4.textContent)
+  })
+
+  const boxContainer = document.querySelector('#boxContainer')
+
+  boxContainer.addEventListener("myEvent", (e) => {
+    logger(e, 'box container')
+  })
+
+  boxContainer.addEventListener("myBubbleEvent", (e) => {
+    logger(e, 'box container')
+  })
+</script>

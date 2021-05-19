@@ -1,0 +1,48 @@
+<body>
+  <script>
+    const person = {
+        name: {
+            first: 'Bob',
+            last: 'Smith',
+            other: {
+                ot1: 'ot1'
+            },
+        },
+        age: 32,
+        gender: 'male',
+        interests: ['music', 'skiing', {a: 1, b: 2}],
+    };
+
+    const personRef = person;
+    const personCopy = Object.assign({}, person);
+    const personES6Copy = {...person};
+    const personDeepCopy = deepCopy(person);
+
+    personRef.age = 1000;
+    personRef.name.first = 'changed!!!';
+    personRef.interests[2].a = 'changed!!!';
+    personRef.name.other.ot1 = 'changed!!!';
+
+    // personES6Copy.age = 1000;
+    // personES6Copy.name.first = 'changed!!!';
+    // personES6Copy.interests[2].a = 'changed!!!';
+    // personES6Copy.name.other.ot1 = 'changed!!!';
+
+    // personDeepCopy.age = 1000;
+    // personDeepCopy.name.first = 'changed!!!';
+    // personDeepCopy.interests[2].a = 'changed!!!';
+    // personDeepCopy.name.other.ot1 = 'changed!!!';
+
+    function deepCopy(obj) {
+        const r = Array.isArray(obj) ? [...obj] : {...obj}
+
+        for (const [key, value] of Object.entries(obj)) {
+            if (typeof value === 'object') {
+                r[key] = deepCopy(value);
+            }
+        }
+
+        return r;
+    }
+</script>
+</body>

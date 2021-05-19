@@ -1,0 +1,38 @@
+<form>
+  <div>
+    <label for="fname">First name: </label>
+    <input id="fname" type="text">
+  </div>
+  <div>
+    <label for="lname">Last name: </label>
+    <input id="lname" type="text">
+  </div>
+  <div>
+    <input id="submit" type="submit">
+  </div>
+</form>
+<p></p>
+<a target="_blank"
+   href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault">MDN Event.preventDefault()
+</a>
+<script>
+  const form = document.querySelector('form');
+  const fname = document.getElementById('fname');
+  const lname = document.getElementById('lname');
+  const para = document.querySelector('p');
+  const a = document.querySelector('a');
+
+  form.addEventListener('submit', e => {
+    if (fname.value === '' || lname.value === '') {
+      e.preventDefault();
+      para.textContent = 'You need to fill in both names!';
+      console.log(e.defaultPrevented);
+    }
+  });
+
+  a.onclick = (e) => {
+    e.preventDefault();
+    console.log(e)
+    console.log(e.defaultPrevented);
+  }
+</script>

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+
+COMMIT=$1
+TAG="$(git describe)-$((RANDOM % 90 + 10))"
+
+if [[ -z ${COMMIT} ]]; then
+  echo "missing parameter"
+  exit 1
+fi
+
+echo "moving to ${COMMIT}..."
+git reset HEAD --hard
+git clean -df
+git tag | xargs git tag -d
+git fetch -p --tags --force
+git checkout origin/main
+git pull origin main --rebase --force
+git checkout "${COMMIT}"

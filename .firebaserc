@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "default": "classroom-playground",
+    "view": "classroom-playground"
+  },
+  "targets": {
+    "classroom-playground": {
+      "hosting": {
+        "view": [
+          "classroom-playground-view"
+        ],
+        "prod": [
+          "classroom-playground"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

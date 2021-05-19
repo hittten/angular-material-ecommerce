@@ -1,0 +1,86 @@
+{
+  "hosting": [
+    {
+      "public": "dist/angular-ecommerce",
+      "target": "prod",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "public": "deploy",
+      "target": "view",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/fake-http/**",
+          "destination": "/fake-http/index.html"
+        },
+        {
+          "source": "/form-file/**",
+          "destination": "/form-file/index.html"
+        },
+        {
+          "source": "/forms/**",
+          "destination": "/forms/index.html"
+        },
+        {
+          "source": "/shopping-cart/**",
+          "destination": "/shopping-cart/index.html"
+        },
+        {
+          "source": "/service/**",
+          "destination": "/service/index.html"
+        },
+        {
+          "source": "/custom-directive-pipes/**",
+          "destination": "/custom-directive-pipes/index.html"
+        },
+        {
+          "source": "/gridview-pipes/**",
+          "destination": "/gridview-pipes/index.html"
+        },
+        {
+          "source": "/product-list/**",
+          "destination": "/product-list/index.html"
+        },
+        {
+          "source": "/header/**",
+          "destination": "/header/index.html"
+        },
+        {
+          "source": "/init/**",
+          "destination": "/init/index.html"
+        },
+        {
+          "source": "/fake-http/**",
+          "destination": "/fake-http/index.html"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "emulators": {
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

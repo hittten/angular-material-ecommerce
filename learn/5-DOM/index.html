@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+    div {
+      padding: 10px;
+      background: lightgray;
+    }
+
+    div ul .done {
+      color: blue;
+    }
+
+    .done {
+      background: gray;
+    }
+  </style>
+</head>
+<body>
+<h1>DOM Examples</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores deserunt facilis fugiat laborum, natus quae
+  quaerat quas? Autem commodi dicta doloremque ducimus eius enim esse necessitatibus recusandae, reprehenderit
+  veritatis. Voluptatibus?</p>
+
+<p class="toRemove">other to remove</p>
+
+<div>
+  <p class="done">This is a text with grey background color</p>
+  <ul>
+    <li>hello</li>
+    <li>how</li>
+    <li>are</li>
+    <li class="done">you</li>
+  </ul>
+</div>
+
+<script>
+  // https://developer.mozilla.org/en-US/docs/Glossary/DOM
+
+  // querySelector
+  const titleElement = document.querySelector('h1');
+  console.log('titleElement', titleElement.textContent);
+
+  const divElement = document.querySelector('div');
+  console.log('divElement', divElement);
+
+  const ulElement = divElement.querySelector('ul');
+  console.log('ulElement', ulElement);
+
+  const pElement = divElement.querySelector('p');
+  console.log('pElement', pElement.textContent);
+
+  const lastElementOfList = document.querySelector('div ul .done');
+  console.log('lastElementOfList', lastElementOfList);
+
+  console.log('first .done', document.querySelector('.done'));
+
+  // querySelectorAll
+  const paragraphs = document.querySelectorAll('p');
+  console.log('paragraphs', paragraphs);
+
+  const liElements = document.querySelectorAll('li');
+  console.log('liElements', liElements);
+
+  console.log('all .done', document.querySelectorAll('.done'));
+
+  // createElement
+  const myParagraph = document.createElement('p');
+  myParagraph.textContent = 'hello world';
+
+  // append / appendChild
+  document.body.append(myParagraph, 'New text!!!');
+  document.body.appendChild(myParagraph);
+  // divElement.append(myParagraph, 'other new text');
+
+  // remove / removeChild
+  document.querySelector('.toRemove').remove();
+  // ulElement.removeChild(lastElementOfList)
+
+  // parentElement / parentNode
+  console.log('my parent', ulElement.parentElement);
+  console.log('my parent', ulElement.parentElement.parentElement);
+
+  // innerHTML / textContent
+  console.log(divElement.innerHTML);
+  console.log(divElement.textContent);
+
+  // divElement.textContent = '<p class="done">new text content</p>'
+  // divElement.innerHTML = '<p class="done">new text content</p>'
+
+</script>
+</body>
+</html>
