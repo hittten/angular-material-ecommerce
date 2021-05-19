@@ -1,0 +1,27 @@
+<p>
+  <button>Click me</button>
+</p>
+<p>
+  <label>
+    name:
+    <input type="text">
+  </label>
+</p>
+<script>
+  const button = document.querySelector('button')
+  const input = document.querySelector('input')
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick
+  // https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
+  button.onclick = (event) => {
+    console.log(event.target)
+    console.log(event)
+  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onkeyup
+  // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+  input.onkeyup = (event) => {
+    console.log(event.target)
+    console.log(event)
+  }
+</script>
