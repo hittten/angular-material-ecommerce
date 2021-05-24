@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {PRODUCTS} from "../../modules/product/mock-products";
+import {Component, inject} from '@angular/core';
 import {ProductListComponent} from '../../modules/product/product-list/product-list.component';
+import {ProductService} from "../../modules/product/product.service";
 
 @Component({
   selector: 'app-products-page',
@@ -10,5 +10,6 @@ import {ProductListComponent} from '../../modules/product/product-list/product-l
   imports: [ProductListComponent]
 })
 export class ProductsPageComponent {
-  products = PRODUCTS;
+  productService = inject(ProductService)
+  products = this.productService.list()
 }

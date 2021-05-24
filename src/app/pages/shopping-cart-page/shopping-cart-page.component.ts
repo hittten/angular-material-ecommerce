@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {SHOPPING_CART_ITEMS} from "../../modules/product/mock-products";
+import {Component, inject} from '@angular/core';
 import {ProductListComponent} from '../../modules/product/product-list/product-list.component';
+import {ProductService} from "../../modules/product/product.service";
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -10,6 +10,6 @@ import {ProductListComponent} from '../../modules/product/product-list/product-l
   imports: [ProductListComponent]
 })
 export class ShoppingCartPageComponent {
-  products = SHOPPING_CART_ITEMS;
-
+  productService = inject(ProductService)
+  products = this.productService.listShoppingCartItems()
 }
