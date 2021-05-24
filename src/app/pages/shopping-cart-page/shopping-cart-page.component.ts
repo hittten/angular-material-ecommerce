@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {SHOPPING_CART_ITEMS} from "../../modules/product/mock-products";
-import {ProductListComponent} from '../../modules/product/product-list/product-list.component';
+import {Component, inject} from '@angular/core';
+import {ProductService} from "../../modules/product/product.service";
+import {ProductModule} from "../../modules/product/product.module";
 
 @Component({
   selector: 'app-shopping-cart-page',
   templateUrl: './shopping-cart-page.component.html',
   styleUrls: ['./shopping-cart-page.component.scss'],
   standalone: true,
-  imports: [ProductListComponent]
+  imports: [ProductModule]
 })
 export class ShoppingCartPageComponent {
-  products = SHOPPING_CART_ITEMS;
-
+  productService = inject(ProductService)
+  products = this.productService.listShoppingCartItems()
 }
