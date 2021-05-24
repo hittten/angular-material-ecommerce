@@ -2,10 +2,10 @@
   <h1>{{title}}</h1>
 
   <mat-button-toggle-group #view="matButtonToggleGroup" value="list">
-    <mat-button-toggle value="list" aria-label="ver como lista">
+    <mat-button-toggle value="list" appTooltip="ver como lista">
       <mat-icon>view_list</mat-icon>
     </mat-button-toggle>
-    <mat-button-toggle value="grid" aria-label="ver como grid">
+    <mat-button-toggle value="grid" appTooltip="ver como grid">
       <mat-icon>view_module</mat-icon>
     </mat-button-toggle>
   </mat-button-toggle-group>
@@ -19,7 +19,7 @@
         ({{product.createdAt | date:'dd/MM/yy'}}) -
         {{product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description}}
       </p>
-      <p class="price">{{product.price}} €</p>
+      <p class="price" appHighlight="red">{{product.price | euroCurrency}}</p>
 
       <button mat-raised-button [color]="buttonColor">
         <mat-icon>{{buttonIcon}}</mat-icon>
@@ -33,13 +33,15 @@
     <mat-card *ngFor="let product of products">
       <mat-card-header>
         <mat-card-title>{{product.name | uppercase}}</mat-card-title>
-        <mat-card-subtitle>{{product.createdAt | date:'dd/MM/yy'}}</mat-card-subtitle>
+        <mat-card-subtitle>{{product.createdAt | date : 'long'}}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image [src]="product.image" [alt]="product.name">
       <mat-card-content>
         <p>
           {{product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description}}
         </p>
+
+        <p class="price" appHighlight="red">{{product.price | currency : 'EUR'}}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button [color]="buttonColor">
