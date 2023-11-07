@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <h1>Products</h1>
+
+  <ul>
+    <li *ngFor="let product of products; last as last">
+      <img ngSrc="{{product.image}}" alt="{{product.name}}" width="150" height="150">
+      <h2>{{product.name}}</h2>
+      <p>{{product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description}}</p>
+      <p class="price">{{product.price}} €</p>
+
+      <button mat-raised-button color="primary">
+        <mat-icon>add_shopping_cart</mat-icon>
+        add to shopping cart
+      </button>
+      <mat-divider  *ngIf="!last"></mat-divider>
+    </li>
+  </ul>
+</div>
