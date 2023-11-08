@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Product} from "../product";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-product-list',
@@ -8,4 +9,8 @@ import {Product} from "../product";
 })
 export class ProductListComponent {
   @Input() products: Product[] = [];
+  @Input() title = "";
+  @Input() buttonText = "";
+  @Input() buttonIcon = "";
+  @Input() buttonColor: ThemePalette = "primary";
 }
