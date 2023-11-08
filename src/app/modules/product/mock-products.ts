@@ -1,5 +1,25 @@
 import {Product} from './product';
 
+export const SHOPPING_CART_ITEMS: Product[] = [
+  {
+    id: '3',
+    name: 'product #3',
+    price: 13,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, fugiat nam? Animi commodi, debitis est, explicabo' +
+      'magni nisi rem repellendus reprehenderit repudiandae tenetur ullam velit? Aspernatur consequuntur sunt vitae voluptatibus!',
+    image: 'https://picsum.photos/id/30/300/300',
+    createdAt: '2019-12-31T23:00:00.000Z',
+  },
+  {
+    id: '5',
+    name: 'product #5',
+    price: 15,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, fugiat nam? Animi commodi, debitis est, explicabo' +
+      'magni nisi rem repellendus reprehenderit repudiandae tenetur ullam velit? Aspernatur consequuntur sunt vitae voluptatibus!',
+    image: 'https://picsum.photos/id/50/300/300',
+    createdAt: '2019-12-31T23:00:00.000Z',
+  },
+]
 export const PRODUCTS: Product[] = [
   {
     id: '1',
