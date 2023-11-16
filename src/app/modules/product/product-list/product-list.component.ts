@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from "../product";
 import {ThemePalette} from "@angular/material/core";
 import {MatDividerModule} from '@angular/material/divider';
@@ -39,4 +39,6 @@ export class ProductListComponent {
   @Input() buttonText = "";
   @Input() buttonIcon = "";
   @Input() buttonColor: ThemePalette = "primary";
+
+  @Output() buttonClick = new EventEmitter<Product>();
 }

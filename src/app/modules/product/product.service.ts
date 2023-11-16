@@ -2,19 +2,50 @@ import {Injectable} from '@angular/core';
 import {PRODUCTS, SHOPPING_CART_ITEMS} from "./mock-products";
 import {Product} from "./product";
 
+export type ProductBase = Pick<Product, "name" | "price" | "description">
+
+export interface ProductInput extends ProductBase {
+  image: File
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor() {
+  create(product: ProductInput) {
+    const id = (Math.floor(Math.random() * (999 - 100) + 100) + new Date().getTime()).toString()
+
+    const data = {
+      ...product,
+      id,
+      createdAt: new Date().toISOString(),
+      image: URL.createObjectURL(product.image),
+    }
+
+    PRODUCTS.unshift(data);
+
+    return product;
   }
 
   list(): Product[] {
+    console.log("listing products", PRODUCTS)
     return PRODUCTS;
   }
 
   listShoppingCartItems(): Product[] {
-    return SHOPPING_CART_ITEMS
+    console.log("listing shopping cart items", SHOPPING_CART_ITEMS)
+    return SHOPPING_CART_ITEMS;
+  }
+
+  addToShoppingCart(product: Product) {
+    console.log("adding to shopping cart", product)
+    SHOPPING_CART_ITEMS.unshift(product);
+  }
+
+  removeFromShoppingCart(product: Product): void {
+    console.log("removing to shopping cart", product)
+    const id = SHOPPING_CART_ITEMS.findIndex(value => value.id === product.id);
+    SHOPPING_CART_ITEMS.splice(id, 1);
   }
 }
