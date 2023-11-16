@@ -4,4 +4,8 @@
   buttonColor="primary"
   buttonIcon="add_shopping_cart"
   buttonText="add to shopping cart"
+  (buttonClick)="addToShoppingCart($event)"
 />
+<button color="primary" mat-fab aria-label="crear producto" routerLink="/product-create">
+  <mat-icon>add</mat-icon>
+</button>

@@ -1,0 +1,86 @@
+<div class="wrapper">
+  <h1>Nuevo producto</h1>
+
+  <form #formElement [formGroup]="productForm" (submit)="submit()" (reset)="reset()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input required matInput formControlName="name" placeholder="Ej. producto #20">
+      @if (getError('name')) {
+        <mat-error>{{getError('name')}}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input required type="number" matInput formControlName="price" placeholder="20,12">
+      @if (getError('price')) {
+        <mat-error>{{getError('price')}}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field hintLabel="300 caracteres máximo">
+      <mat-label>Descripción</mat-label>
+      <textarea #descriptionInput required matInput formControlName="description"
+                placeholder="Ej. Descripción del producto #20"></textarea>
+      <mat-hint align="end">{{descriptionInput.value.length}}/300</mat-hint>
+      @if (getError('description')) {
+        <mat-error>{{getError('description')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <div>
+      <div class="dropzone" [ngClass]="{'dragOver': isDragOver, 'selected-image': imagePreviewURL}"
+           (dragenter)="dragEnter()" (dragover)="dragOver($event)" (dragleave)="dragLeave()"
+           (drop)="dropHandler($event)">
+        @if (isDragOver) {
+          suelta la imagen aquí
+        } @else if (imagePreviewURL) {
+          <img (click)="imageInput.click()" [src]="imagePreviewURL" alt="uploaded image">
+        } @else {
+          <mat-icon color="primary">photo_library</mat-icon>
+          <span>Arrastra una imagen hasta aquí o</span>
+          <a mat-stroked-button (click)="imageInput.click()" color="primary">sube una imagen</a>
+          <mat-hint>El tamaño máximo es de 2 MB.</mat-hint>
+        }
+      </div>
+      <input #imageInput type="file" hidden accept="image/png, image/jpeg, image/gif" (change)="fileChange($event)">
+      @if (getError('image')) {
+        <mat-error>{{getError('image')}}</mat-error>
+      }
+    </div>
+    <p>
+      <button mat-button color="primary" type="submit" [disabled]="productForm.invalid">Agregar</button>
+      <button mat-button type="reset">Limpiar</button>
+    </p>
+
+<!--    <section>-->
+<!--      <strong>Form value: </strong>-->
+<!--      <pre>{{productForm.value | json}}</pre>-->
+
+<!--      <strong>Form status: </strong>-->
+<!--      <pre>{{productForm.status}}</pre>-->
+
+<!--      <strong>-->
+<!--        name errors:-->
+<!--        ({{productForm.controls.name.status}}) - @if (productForm.controls.name.dirty) {dirty}-->
+<!--      </strong>-->
+<!--      <pre>{{productForm.controls.name.errors | json}}</pre>-->
+
+<!--      <strong>-->
+<!--        price errors:-->
+<!--        ({{productForm.controls.price.status}}) - @if (productForm.controls.price.dirty) {dirty}-->
+<!--      </strong>-->
+<!--      <pre>{{productForm.controls.price.errors | json}}</pre>-->
+
+<!--      <strong>-->
+<!--        description errors:-->
+<!--        ({{productForm.controls.description.status}}) - @if (productForm.controls.description.dirty) {dirty}-->
+<!--      </strong>-->
+<!--      <pre>{{productForm.controls.description.errors | json}}</pre>-->
+
+<!--      <strong>-->
+<!--        image errors:-->
+<!--        ({{productForm.controls.image.status}}) - @if (productForm.controls.image.dirty) {dirty}-->
+<!--      </strong>-->
+<!--      <pre>{{productForm.controls.image.errors | json}}</pre>-->
+<!--    </section>-->
+  </form>
+</div>

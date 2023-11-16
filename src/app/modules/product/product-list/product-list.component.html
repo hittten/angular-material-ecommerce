@@ -14,7 +14,7 @@
     <ul>
       @for (product of products; track product.id; let last = $last) {
         <li>
-          <img [ngSrc]="product.image" [alt]="product.name" width="150" height="150">
+          <img [src]="product.image" [alt]="product.name" width="150" height="150">
           <h2>{{ product.name | uppercase }}</h2>
 
           <p>
@@ -23,7 +23,7 @@
           </p>
           <p class="price" appHighlight="red">{{ product.price | euroCurrency }}</p>
 
-          <button mat-raised-button [color]="buttonColor">
+          <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor">
             <mat-icon>{{ buttonIcon }}</mat-icon>
             {{ buttonText }}
           </button>
@@ -54,7 +54,7 @@
             <p class="price" appHighlight="red">{{ product.price | currency : 'EUR' }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button [color]="buttonColor">
+            <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor">
               <mat-icon>{{ buttonIcon }}</mat-icon>
               {{ buttonText }}
             </button>
