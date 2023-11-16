@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <h1>{{title}}</h1>
+  <h1>{{ title }}</h1>
 
   <mat-button-toggle-group #view="matButtonToggleGroup" value="list">
     <mat-button-toggle value="list" appTooltip="ver como lista">
@@ -10,45 +10,59 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <ul *ngIf="view.value == 'list'">
-    <li *ngFor="let product of products; last as last">
-      <img [ngSrc]="product.image" [alt]="product.name" width="150" height="150">
-      <h2>{{product.name | uppercase}}</h2>
+  @if (view.value == 'list') {
+    <ul>
+      @for (product of products; track product.id; let last = $last) {
+        <li>
+          <img [ngSrc]="product.image" [alt]="product.name" width="150" height="150">
+          <h2>{{ product.name | uppercase }}</h2>
 
-      <p>
-        ({{product.createdAt | date:'dd/MM/yy'}}) -
-        {{product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description}}
-      </p>
-      <p class="price" appHighlight="red">{{product.price | euroCurrency}}</p>
+          <p>
+            ({{ product.createdAt | date:'dd/MM/yy' }}) -
+            {{ product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description }}
+          </p>
+          <p class="price" appHighlight="red">{{ product.price | euroCurrency }}</p>
 
-      <button mat-raised-button [color]="buttonColor">
-        <mat-icon>{{buttonIcon}}</mat-icon>
-        {{buttonText}}
-      </button>
+          <button mat-raised-button [color]="buttonColor">
+            <mat-icon>{{ buttonIcon }}</mat-icon>
+            {{ buttonText }}
+          </button>
 
-      <mat-divider *ngIf="!last"></mat-divider>
-    </li>
-  </ul>
-  <div class="grid" *ngIf="view.value == 'grid'">
-    <mat-card *ngFor="let product of products">
-      <mat-card-header>
-        <mat-card-title>{{product.name | uppercase}}</mat-card-title>
-        <mat-card-subtitle>{{product.createdAt | date : 'long'}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="product.image" [alt]="product.name">
-      <mat-card-content>
-        <p>
-          {{product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description}}
-        </p>
+          @if (!last) {
+            <mat-divider></mat-divider>
+          }
+        </li>
+      } @empty {
+        <li class="message">No products</li>
+      }
+    </ul>
+  }
+  @if (view.value == 'grid') {
+    <div class="grid">
+      @for (product of products; track product.id) {
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ product.name | uppercase }}</mat-card-title>
+            <mat-card-subtitle>{{ product.createdAt | date : 'long' }}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image [src]="product.image" [alt]="product.name">
+          <mat-card-content>
+            <p>
+              {{ product.description.length > 150 ? (product.description.slice(0, 150)) + '...' : product.description }}
+            </p>
 
-        <p class="price" appHighlight="red">{{product.price | currency : 'EUR'}}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button [color]="buttonColor">
-          <mat-icon>{{buttonIcon}}</mat-icon>
-          {{buttonText}}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+            <p class="price" appHighlight="red">{{ product.price | currency : 'EUR' }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button [color]="buttonColor">
+              <mat-icon>{{ buttonIcon }}</mat-icon>
+              {{ buttonText }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      } @empty {
+        <span class="message">No products</span>
+      }
+    </div>
+  }
 </div>
