@@ -6,12 +6,16 @@ import {routes} from './app.routes';
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 import localeEs from "@angular/common/locales/es";
+import {provideHttpClient, withFetch} from "@angular/common/http";
 registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
+    provideHttpClient(
+      withFetch(),
+    ),
     {provide: LOCALE_ID, useValue: 'es-ES'},
   ]
 };
