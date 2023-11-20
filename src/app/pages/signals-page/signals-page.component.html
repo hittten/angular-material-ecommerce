@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <h1>Signals</h1>
+
+  <section>
+    <h2>Writable signals</h2>
+
+    <p>count {{ normalCount }}</p>
+    <p>count {{ count() }}</p>
+
+    <p class="buttons">
+      <button mat-raised-button (click)="updateCount()">update count</button>
+      <button mat-raised-button (click)="resetCount()">reset count</button>
+    </p>
+
+    <mat-divider/>
+  </section>
+
+<!--  <section>-->
+<!--    <h2>Computed</h2>-->
+
+<!--    <p>normal double count {{ normalDoubleCount() }}</p>-->
+<!--    <p>signal doubleCount: {{ doubleCount() }}</p>-->
+<!--    <p>signal count: {{ count() }},-->
+<!--      @if (isOdd()) {-->
+<!--        the number is odd-->
+<!--      } @else {-->
+<!--        the number is even-->
+<!--      }-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Input</mat-label>-->
+<!--        <input matInput>-->
+<!--      </mat-form-field>-->
+<!--    </p>-->
+
+<!--    <p class="buttons">-->
+<!--      <button mat-raised-button (click)="updateCount()">update count</button>-->
+<!--      <button mat-raised-button (click)="resetCount()">reset count</button>-->
+<!--    </p>-->
+
+<!--    <mat-divider/>-->
+<!--  </section>-->
+
+<!--  <section>-->
+<!--    <h2>Computed - dynamic dependencies</h2>-->
+<!--    <p>signal conditionalCount: {{ conditionalCount() }}</p>-->
+
+<!--    <p class="buttons">-->
+<!--      <button mat-raised-button (click)="showCount.set(true)">show message</button>-->
+<!--      <button mat-raised-button (click)="showCount.set(false)">hide message</button>-->
+<!--    </p>-->
+
+<!--    <mat-divider/>-->
+<!--  </section>-->
+
+<!--  <section>-->
+<!--    <h2>Effects</h2>-->
+
+<!--    <p class="buttons">-->
+<!--      <button mat-raised-button (click)="updateCount()">update count</button>-->
+<!--      <button mat-raised-button (click)="deleteEffect()">destroy effect</button>-->
+<!--    </p>-->
+<!--    <mat-divider/>-->
+<!--  </section>-->
+
+<!--  <section>-->
+<!--    <h2>Signals - Equality functions</h2>-->
+<!--    <p>data: {{data()}}</p>-->
+
+<!--    <p class="buttons">-->
+<!--      <button mat-raised-button (click)="updateData()">update data</button>-->
+<!--    </p>-->
+<!--    <mat-divider/>-->
+<!--  </section>-->
+
+<!--  <section>-->
+<!--    <h2>Effects - cleanup functions</h2>-->
+<!--    <p class="buttons">-->
+<!--      <button mat-raised-button (click)="this.mySecondEffect.destroy()">destroy</button>-->
+<!--    </p>-->
+<!--    <mat-divider/>-->
+<!--  </section>-->
+</div>

@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+div.wrapper {
+  display: grid;
+  gap: 32px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .mat-divider {
+    margin-top: 24px;
+  }
+}

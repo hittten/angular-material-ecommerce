@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <h1>{{ title }}</h1>
+  <h1>{{ title() }}</h1>
 
   <mat-button-toggle-group #view="matButtonToggleGroup" value="list">
     <mat-button-toggle value="list" appTooltip="ver como lista">
@@ -10,10 +10,10 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  @if (products$ | async; as products) {
+  @if (products() !== undefined) {
     @if (view.value == 'list') {
       <ul>
-        @for (product of products; track product.id; let last = $last) {
+        @for (product of products(); track product.id; let last = $last) {
           <li>
             <img [src]="product.image" [alt]="product.name" width="150" height="150">
             <h2>{{ product.name | uppercase }}</h2>
@@ -24,9 +24,9 @@
             </p>
             <p class="price" appHighlight="red">{{ product.price | euroCurrency }}</p>
 
-            <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor">
-              <mat-icon>{{ buttonIcon }}</mat-icon>
-              {{ buttonText }}
+            <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor()">
+              <mat-icon>{{ buttonIcon() }}</mat-icon>
+              {{ buttonText() }}
             </button>
 
             @if (!last) {
@@ -40,7 +40,7 @@
     }
     @if (view.value == 'grid') {
       <div class="grid">
-        @for (product of products; track product.id) {
+        @for (product of products(); track product.id) {
           <mat-card>
             <mat-card-header>
               <mat-card-title>{{ product.name | uppercase }}</mat-card-title>
@@ -55,9 +55,9 @@
               <p class="price" appHighlight="red">{{ product.price | currency : 'EUR' }}</p>
             </mat-card-content>
             <mat-card-actions>
-              <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor">
-                <mat-icon>{{ buttonIcon }}</mat-icon>
-                {{ buttonText }}
+              <button (click)="buttonClick.emit(product)" mat-raised-button [color]="buttonColor()">
+                <mat-icon>{{ buttonIcon() }}</mat-icon>
+                {{ buttonText() }}
               </button>
             </mat-card-actions>
           </mat-card>

@@ -4,6 +4,7 @@ import {Product} from "./product";
 import {ProductModule} from "./product.module";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {delay, Observable, of, tap} from "rxjs";
+import {AppService} from "../../app.service";
 
 export type ProductBase = Pick<Product, "name" | "price" | "description">
 
@@ -16,6 +17,7 @@ export interface ProductInput extends ProductBase {
 })
 export class ProductService {
   private snackBar = inject(MatSnackBar)
+  private app = inject(AppService)
 
   create(product: ProductInput): Observable<Product> {
     const id = (Math.floor(Math.random() * (999 - 100) + 100) + new Date().getTime()).toString()
@@ -59,6 +61,7 @@ export class ProductService {
     return of('OK').pipe(
       delay(500),
       tap(() => {
+        this.app.cartItems.update(c => ++c)
         this.snackBar.open(`${product.name} added to cart`, "close")
         console.log("product added!", product);
       })
@@ -73,6 +76,7 @@ export class ProductService {
     return of('OK').pipe(
       delay(500),
       tap(() => {
+        this.app.cartItems.update(c => --c)
         this.snackBar.open(`${product.name} removed from cart`, "close")
         console.log('product removed!', product);
       })

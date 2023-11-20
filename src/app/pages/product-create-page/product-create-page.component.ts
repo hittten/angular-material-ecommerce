@@ -10,10 +10,13 @@ import {CdkDropList} from "@angular/cdk/drag-drop";
 import {imageFileValidator} from "../../image-file.validator";
 import {SizeBytesPipe} from "../../size-bytes.pipe";
 import {ProductModule} from "../../modules/product/product.module";
+import {firstValueFrom} from "rxjs";
 
 type WithFormControl<T> = {
   [P in keyof T]: FormControl<T[P]>;
 };
+
+//TODO: signals
 
 type ProductForm = WithFormControl<ProductInput>
 
@@ -135,16 +138,14 @@ export class ProductCreatePageComponent {
     this.setFile(file)
   }
 
-  submit() {
+  async submit() {
     if (!this.productForm.valid) {
       return;
     }
 
     const product = this.productForm.getRawValue()
-    this.productService.create(product)
-      .subscribe(createdProduct => {
-        this.reset()
-      })
+    await firstValueFrom(this.productService.create(product))
+    this.reset()
   }
 
   reset() {

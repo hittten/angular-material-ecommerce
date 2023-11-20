@@ -1,11 +1,12 @@
-import {Component, inject, OnDestroy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ProductService} from "../../modules/product/product.service";
 import {ProductModule} from "../../modules/product/product.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {Product} from "../../modules/product/product";
-import {Subscription} from "rxjs";
+import {toSignal} from "@angular/core/rxjs-interop";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-products-page',
@@ -14,18 +15,12 @@ import {Subscription} from "rxjs";
   standalone: true,
   imports: [ProductModule, MatButtonModule, MatIconModule, RouterLink]
 })
-export class ProductsPageComponent implements OnDestroy {
-  private shoppingCartSubscription?: Subscription;
+export class ProductsPageComponent {
   productService = inject(ProductService)
-  products$ = this.productService.list()
+  products = toSignal(this.productService.list())
 
   addToShoppingCart(product: Product) {
-
-    this.shoppingCartSubscription = this.productService.addToShoppingCart(product)
-      .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.shoppingCartSubscription?.unsubscribe();
+    firstValueFrom(this.productService.addToShoppingCart(product))
+      .then()
   }
 }
