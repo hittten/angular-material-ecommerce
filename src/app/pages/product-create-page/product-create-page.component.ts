@@ -15,6 +15,8 @@ type WithFormControl<T> = {
   [P in keyof T]: FormControl<T[P]>;
 };
 
+//TODO: signals
+
 type ProductForm = WithFormControl<ProductInput>
 
 @Component({

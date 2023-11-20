@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <h1>Signals</h1>
+
+  <p>normal count {{normalCount}}</p>
+  <p>normal double count {{normalDoubleCount()}}</p>
+  <p>
+    <mat-form-field>
+      <mat-label>Input</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </p>
+
+  <mat-divider/>
+  <p>signal count: {{count()}}, @if (isOdd()) {the number is odd} @else {the number is even} </p>
+  <p>signal doubleCount: {{doubleCount()}}</p>
+  <p>signal conditionalCount: {{conditionalCount()}}</p>
+
+  <mat-divider/>
+  <p><button mat-raised-button (click)="updateCount()">update count</button></p>
+  <p><button mat-raised-button (click)="updateNormal()">update normal count</button></p>
+  <p><button mat-raised-button (click)="showCount.set(true)">show count</button></p>
+  <p><button mat-raised-button (click)="showCount.set(false)">hide count</button></p>
+  <p><button mat-raised-button (click)="deleteEffect()">delete effect</button></p>
+</div>
