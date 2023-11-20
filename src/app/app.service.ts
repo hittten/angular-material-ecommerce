@@ -1,13 +1,18 @@
-import {effect, Injectable, signal} from '@angular/core';
-import {SHOPPING_CART_ITEMS} from "./modules/product/mock-products";
+import {effect, inject, Injectable, signal} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../environments/environment";
+import {firstValueFrom, map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  cartItems = signal(SHOPPING_CART_ITEMS.length)
+  private http = inject(HttpClient)
+  cartItems = signal(0)
 
   constructor() {
+    firstValueFrom(this.http.get<{ count: number }>(`${environment.apiURL}/shoppingCart/${environment.user}/count`))
+      .then(value => this.cartItems.set(value.count))
     effect(() => {
       console.log(`cart items: ${this.cartItems()}`)
     });

@@ -7,6 +7,7 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 
 import localeEs from "@angular/common/locales/es";
+import {provideHttpClient, withFetch} from "@angular/common/http";
 registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
     provideAnimationsAsync(),
+    provideHttpClient(
+      withFetch(),
+    ),
     {provide: LOCALE_ID, useValue: 'es-ES'},
   ]
 };
