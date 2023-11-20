@@ -9,6 +9,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {CdkDropList} from "@angular/cdk/drag-drop";
 import {imageFileValidator} from "../../image-file.validator";
 import {SizeBytesPipe} from "../../size-bytes.pipe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 type WithFormControl<T> = {
   [P in keyof T]: FormControl<T[P]>;
@@ -38,6 +39,7 @@ export class ProductCreatePageComponent {
   private formBuilder = inject(FormBuilder)
   private productService = inject(ProductService)
   private sizeBytesPipe = inject(SizeBytesPipe)
+  private snackBar = inject(MatSnackBar)
 
   isDragOver = false;
   imagePreviewURL = ''
@@ -137,8 +139,11 @@ export class ProductCreatePageComponent {
     }
 
     const product = this.productForm.getRawValue()
-    this.productService.create(product)
-    this.reset()
+    this.productService.create(product).subscribe(createdProduct => {
+      this.reset()
+      this.snackBar.open(`El producto ${createdProduct.name} fue creado`, 'cerrar')
+    })
+
   }
 
   reset() {
