@@ -13,6 +13,7 @@ import {MatCardModule} from "@angular/material/card";
 import {TooltipDirective} from "../../tooltip.directive";
 import {EuroCurrencyPipe} from "../../euro-currency.pipe";
 import {HighlightDirective} from "../../highlight.directive";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {HighlightDirective} from "../../highlight.directive";
     MatDividerModule,
     MatCardModule,
     NgOptimizedImage,
+    MatProgressSpinnerModule,
   ]
 })
 export class ProductModule {

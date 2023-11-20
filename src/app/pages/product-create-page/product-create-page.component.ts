@@ -142,7 +142,9 @@ export class ProductCreatePageComponent {
 
     const product = this.productForm.getRawValue()
     this.productService.create(product)
-    this.reset()
+      .subscribe(createdProduct => {
+        this.reset()
+      })
   }
 
   reset() {
