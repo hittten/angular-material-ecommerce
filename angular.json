@@ -55,7 +55,15 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "routes.txt"
+            },
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {

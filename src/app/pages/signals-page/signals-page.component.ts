@@ -52,11 +52,11 @@ export class SignalsPageComponent {
   myEffect = effect(() => {
     console.log(`[MY-EFFECT] - The current count is: ${this.count()}`);
   });
-  mySecondEffect = effect((onCleanup) => {
-    const int = setInterval(() => console.log('hello!'), 1000)
-
-    onCleanup(() => clearInterval(int))
-  }, {manualCleanup: true});
+  // mySecondEffect = effect((onCleanup) => {
+  //   const int = setInterval(() => console.log('hello!'), 1000)
+  //
+  //   onCleanup(() => clearInterval(int))
+  // }, {manualCleanup: true});
 
   //functions methods
   normalDoubleCount() {
@@ -75,6 +75,6 @@ export class SignalsPageComponent {
 
   deleteEffect() {
     this.myEffect.destroy()
-    this.mySecondEffect.destroy()
+    // this.mySecondEffect.destroy()
   }
 }
