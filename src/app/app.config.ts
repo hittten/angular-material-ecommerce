@@ -9,6 +9,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import localeEs from "@angular/common/locales/es";
 import {provideHttpClient, withFetch} from "@angular/common/http";
 import {provideServiceWorker} from '@angular/service-worker';
+import { provideClientHydration } from '@angular/platform-browser';
 
 registerLocaleData(localeEs);
 
@@ -22,6 +23,6 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
-    }),
+    }), provideClientHydration(),
   ]
 };

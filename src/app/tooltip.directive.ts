@@ -1,4 +1,5 @@
-import {Directive, ElementRef, HostListener, Input} from '@angular/core';
+import {Directive, ElementRef, HostListener, Inject, Input, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from "@angular/common";
 
 @Directive({
   selector: '[appTooltip]',
@@ -7,9 +8,13 @@ import {Directive, ElementRef, HostListener, Input} from '@angular/core';
 export class TooltipDirective {
 
   @Input('appTooltip') message = '';
-  private readonly tooltipElement: HTMLElement;
+  private readonly tooltipElement!: HTMLElement;
 
-  constructor(private el: ElementRef<HTMLElement>) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private el: ElementRef<HTMLElement>
+  ) {
+    if (isPlatformBrowser(this.platformId))
     this.tooltipElement = document.createElement('div');
   }
 
